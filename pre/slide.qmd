@@ -1,0 +1,49 @@
+---
+title: "Aho-Corasick Algorithm Mechanics and Proof"
+format: revealjs
+---
+
+## Constructing the Trie
+
+- **Definition**: A Trie is a tree-like data structure that stores strings by characters.
+- **Process**:
+    - Start with an empty root node.
+    - Insert each pattern by creating a path of nodes, one node per character.
+    - Each node represents a partial match of a pattern.
+- **Example**: Visual example of inserting patterns like `"he"`, `"she"`, `"his"`, `"hers"`
+
+---
+
+## Setting Up the Failure Function
+
+- **Purpose**: Handles mismatches by defining fallback paths
+- **Construction**:
+    - For each node, find the longest suffix that is also a prefix in another pattern.
+    - Use BFS (breadth-first search) to set failure links for each node.
+- **Result**: Creates fallback links to ensure seamless pattern matching even after mismatches
+
+---
+
+## Pattern Matching Process
+
+- **Traversing the Text**:
+    - Start at the root and follow nodes matching text characters.
+    - If a mismatch occurs, use the failure function to find the next viable match.
+    - Record matches as they are found along the path.
+- **Efficiency**: Each character in the text is processed only once.
+
+---
+
+## Proof of Time and Space Complexity
+
+- **Time Complexity**:
+    - Trie Construction: \(O(\sum |P|)\), where \(P\) is the pattern set.
+    - Failure Function Setup: \(O(\sum |P|)\), using BFS.
+    - Text traversal: \(O(n)\), where \(n\) is the text length.
+    - **Total Time Complexity**: \(O(n + \sum |P|)\)
+
+- **Space Complexity**:
+    - Trie Storage: \(O(\sum |P|)\) nodes for each character in each pattern.
+    - Failure Function Storage: \(O(\sum |P|)\) additional pointers for each node.
+    - **Total Space Complexity**: \(O(\sum |P|)\)
+
